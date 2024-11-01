@@ -28,7 +28,12 @@ const theme = reactive(themeStore)
         >
           <div class="relative">
             <!-- usar directiva @click para ejecutar el metodo para cambiar de dark a light o viceversa -->
-            <input type="checkbox" id="toggle" class="sr-only" />
+            <input
+              type="checkbox"
+              id="toggle"
+              class="sr-only"
+              @click="theme.toggleMode()"
+            />
             <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
             <div
               class="dot absolute left-1 top-1 bg-black w-6 h-6 flex items-center justify-center rounded-full transition"
@@ -40,12 +45,15 @@ const theme = reactive(themeStore)
           </div>
 
           <!-- cambiar usar v-bind:class y atributo mode del ThemeState para cambiar el texto -->
-          <div class="label-text ml-2 font-medium">Modo</div>
+          <div class="label-text ml-2 font-medium">Modo{{ theme.text }}</div>
         </label>
       </div>
     </div>
     <!-- usar directiva v-bind:class para asinar clase class si isDark en el store es true -->
-    <div class="img min-h-screen flex flex-col items-center transition"></div>
+    <div
+      class="img min-h-screen flex flex-col items-center transition"
+      v-bind:class="theme.darkmode ? 'dark' : ''"
+    ></div>
     <div class="todo flex-1 lg:w-2/3 xl:w-2/5 w-full px-7">
       <RouterView />
     </div>
